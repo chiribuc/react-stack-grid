@@ -3,38 +3,40 @@ name: Release
 on:
   push:
     branches:
-      - main
+      - main   # Change to your default branch name if necessary
 
 jobs:
   release:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Checkout the code from GitHub
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Ensure full commit history for Changesets to work
 
+      # Step 2: Set up Node.js and NPM
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Set up npmrc for @crob scope
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          echo "@crob:registry=https://registry.npmjs.org/" >> ~/.npmrc
-
+      # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm ci
+        run: npm ci  # Ensures you're using a clean install
 
+      # Step 4: Run tests (optional)
       - name: Run tests
         run: npm test
 
-      - name: Build
+      # Step 5: Build the package (if necessary, adjust as per your package setup)
+      - name: Build the package
         run: npm run build
 
-      - name: Create Release
-        id: changesets
+      # Step 6: Create a changeset and auto-version (automatically commits changeset file)
+      - name: Create Changeset
+        id: changeset
         uses: changesets/action@v1
         with:
           publish: npm publish --access public
@@ -44,3 +46,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Step 7: Version the package (update version, changelog, package.json)
+      - name: Version the package
+        run: npx changeset version
+
+      # Step 8: Publish the package to npm
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
