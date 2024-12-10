@@ -34,24 +34,32 @@ jobs:
       - name: Build the package
         run: npm run build
 
-      # Step 6: Create a changeset and auto-version (automatically commits changeset file)
+      # Step 6: Create a changeset
       - name: Create Changeset
         id: changeset
         uses: changesets/action@v1
         with:
-          publish: npm publish --access public
           commit: "chore: version packages"
-          title: "chore: version packages"
+          publish: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # Step 7: Version the package (update version, changelog, package.json)
+      # Step 7: Apply version bumps and changelog changes
       - name: Version the package
         run: npx changeset version
 
-      # Step 8: Publish the package to npm
+      # Step 8: Commit the changes (version bump, changelog, etc.)
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "chore: update version and changelog"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 9: Publish to npm
       - name: Publish to npm
         run: npm publish --access public
         env:
