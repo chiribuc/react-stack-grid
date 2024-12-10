@@ -1,6 +1,7 @@
 {
   "name": "react-stack-grid",
   "version": "1.0.0",
+  "description": "A responsive and dynamic stack grid component for React, designed to make it easy and efficient to create dynamic, responsive grid layouts. It automatically arranges items based on the available container width, ensuring a visually appealing presentation on all devices.",
   "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -55,7 +56,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/chiribuc/react-stack-grid"
+    "url": "git+https://github.com/chiribuc/react-stack-grid"
   },
   "bugs": {
     "url": "https://github.com/chiribuc/react-stack-grid/issues"
