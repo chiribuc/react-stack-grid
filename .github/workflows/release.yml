@@ -28,13 +28,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      # Create NPM config
-      - name: Create .npmrc
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
-          echo "always-auth=true" >> ~/.npmrc
-
       - name: Create Release
         id: changesets
         uses: changesets/action@v1
