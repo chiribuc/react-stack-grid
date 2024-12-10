@@ -17,9 +17,9 @@ See the [demo](https://react-stack-grid.crobert.dev/) for a live example of Stac
 ## Installation
 
 ```bash
-npm install react-stack-grid
+npm install @crob/react-stack-grid
 # or
-yarn add react-stack-grid
+yarn add @crob/react-stack-grid
 ```
 
 ## Usage
@@ -27,7 +27,7 @@ yarn add react-stack-grid
 ### Basic Usage
 
 ```tsx
-import { StackGrid } from 'react-stack-grid';
+import { StackGrid } from '@crob/react-stack-grid';
 
 interface Item {
   id: number;
@@ -66,7 +66,7 @@ const YourComponent = () => {
 You can manually trigger a reflow of the grid using a ref:
 
 ```tsx
-import { StackGrid, StackGridRef } from 'react-stack-grid';
+import { StackGrid, StackGridRef } from '@crob/react-stack-grid';
 import { useRef } from 'react';
 
 const YourComponent = () => {

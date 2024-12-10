@@ -1,6 +1,6 @@
 {
   "name": "@crob/react-stack-grid",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A responsive and dynamic stack grid component for React, designed to make it easy and efficient to create dynamic, responsive grid layouts. It automatically arranges items based on the available container width, ensuring a visually appealing presentation on all devices.",
   "type": "module",
   "main": "dist/cjs/index.js",
