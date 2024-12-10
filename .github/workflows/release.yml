@@ -1,66 +1,25 @@
-name: Release
+name: Test
 
 on:
   push:
     branches:
-      - main   # Change to your default branch name if necessary
+      - main
 
 jobs:
-  release:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the code from GitHub
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Ensure full commit history for Changesets to work
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js and NPM
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
-          registry-url: 'https://registry.npmjs.org'
 
-      # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm ci  # Ensures you're using a clean install
+        run: npm ci  # Install dependencies
 
-      # Step 4: Run tests (optional)
       - name: Run tests
-        run: npm test
-
-      # Step 5: Build the package (if necessary, adjust as per your package setup)
-      - name: Build the package
-        run: npm run build
-
-      # Step 6: Create a changeset
-      - name: Create Changeset
-        id: changeset
-        uses: changesets/action@v1
-        with:
-          commit: "chore: version packages"
-          publish: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      # Step 7: Apply version bumps and changelog changes
-      - name: Version the package
-        run: npx changeset version
-
-      # Step 8: Commit the changes (version bump, changelog, etc.)
-      - name: Commit changes
-        run: |
-          git add .
-          git commit -m "chore: update version and changelog"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Step 9: Publish to npm
-      - name: Publish to npm
-        run: npm publish --access public
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm test  # Run tests
