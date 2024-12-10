@@ -25,16 +25,24 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Run build
+      - name: Build
         run: npm run build
+
+      # Create NPM config
+      - name: Create .npmrc
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "always-auth=true" >> ~/.npmrc
 
       - name: Create Release
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: npm publish
+          publish: npm publish --access public
           commit: "chore: version packages"
           title: "chore: version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
