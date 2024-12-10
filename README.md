@@ -2,7 +2,7 @@
 
 A responsive and dynamic stack grid component for React, designed to make it easy and efficient to create dynamic, responsive grid layouts. It automatically arranges items based on the available container width, ensuring a visually appealing presentation on all devices.
 
-![twitter-card](https://github.com/chiribuc/chiribuc/assets/46414598/2b34aca7-678a-495a-b9c3-40ecf43d81ae)
+![twitter-card](https://github.com/user-attachments/assets/c0f70661-dfdf-438e-a1af-e35ed41eb38e)
 
 ## Demo
 See the [demo](https://react-stack-grid.crobert.dev/) for a live example of StackGrid in action.
