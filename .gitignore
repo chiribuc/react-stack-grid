@@ -1,0 +1,55 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# build output
+/dist
+/build
+/coverage
+/.next
+/.nuxt
+/.parcel
+/.vite
+/.turbo
+
+# TypeScript
+*.tsbuildinfo
+
+# env files
+.env
+.env.*.local
+
+# IDEs and Editors
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# log files
+*.log
+
+# Jest
+/coverage/
+
+# Storybook
+/storybook-static/
+
+# rollup output
+*.map
+
+# NPM package files
+*.tgz
+
+# Debugger
+.vscode/*
+.idea/*
+
+# Other
+.npmrc
