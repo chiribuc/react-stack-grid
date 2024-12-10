@@ -19,6 +19,11 @@ jobs:
           node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Set up npmrc for @crob scope
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "@crob:registry=https://registry.npmjs.org/" >> ~/.npmrc
+
       - name: Install dependencies
         run: npm ci
 
